@@ -96,7 +96,7 @@ public class GameManager : MonoBehaviour
 
         int score = scoreSystem.CalculateScore(currentHeath, maxHeath);
         int reward = scoreSystem.CalculateReward(currentHeath, maxHeath);
-        int stars = scoreSystem.GetStarRating(currentHeath, maxHeath);
+        int stars = completed ? scoreSystem.GetStarRating(currentHeath, maxHeath) : 0;
 
         buttonAction.SetReward(reward);
         buttonAction.SetScore(score);
