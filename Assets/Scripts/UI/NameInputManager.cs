@@ -27,6 +27,7 @@ public class NameInputManager : MonoBehaviour
         if (changeProfile)
         {
             DataManager.Instance.SwitchOrCreateProfile(playerName);
+            GameEvents.OnPlayerAvatarChange?.Invoke();
         }
         else
         {
