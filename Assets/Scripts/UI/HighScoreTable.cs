@@ -41,13 +41,12 @@ public class HighScoreTable : MonoBehaviour
         var format = (NumberFormatInfo)CultureInfo.InvariantCulture.NumberFormat.Clone();
         format.NumberGroupSeparator = ".";
         profileScore.text = DataManager.Instance.PlayerData.totalScore.ToString("#,0", format);
-
+        var entriesToShow = leaderboard.Take(amount).ToList();
         if (leaderboard != null)
         {
-            leaderboard.Take(amount).ToList();
-            for (int i = 0; i < amount; i++)
+            for (int i = 0; i < entriesToShow.Count; i++)
             {
-                var entry = leaderboard[i];
+                var entry = entriesToShow[i];
                 RectTransform entryTransform = Instantiate(entryTemplate, entryContainer).GetComponent<RectTransform>();
                 var entryUI = entryTransform.GetComponent<LeaderboardEntryUI>();
                 entryTransform.gameObject.SetActive(true);
