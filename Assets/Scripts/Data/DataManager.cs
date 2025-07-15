@@ -304,6 +304,7 @@ public class DataManager : MonoBehaviour
         }
         SaveData();
         GameEvents.UpdatePlayerName?.Invoke();
+        GameEvents.OnPlayerAvatarChange?.Invoke();
 
     }
 

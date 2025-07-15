@@ -9,16 +9,19 @@ public class SimpleMovement : MovementStrategy
         Vector2 toTarget = pos - currentPos;
         float distance = toTarget.magnitude;
 
-        if (distance <= 1f)
+        if (distance > 0.1)
         {
-            rb.linearVelocity = Vector2.zero;
-            rb.position = pos;
+            Vector2 next = Vector2.MoveTowards(
+                 currentPos,
+                 pos,
+                 moveSpeed * Time.fixedDeltaTime
+             );
+            rb.MovePosition(next);
 
         }
         else
         {
-            Vector2 moveDir = toTarget / distance;
-            rb.MovePosition(currentPos + moveDir * moveSpeed * Time.fixedDeltaTime);
+            rb.MovePosition(pos);
         }
     }
 }

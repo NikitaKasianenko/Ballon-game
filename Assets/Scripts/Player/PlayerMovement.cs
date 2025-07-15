@@ -27,23 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (inputProvider.holding)
         {
-            Vector2 current = rb.position;
-            Vector2 target = inputProvider.targetPosition;
-            float dist = Vector2.Distance(current, target);
-
-            if (dist > 0.1)
-            {
-                Vector2 next = Vector2.MoveTowards(
-                    current,
-                    target,
-                    speed * Time.fixedDeltaTime
-                );
-                rb.MovePosition(next);
-            }
-            else
-            {
-                rb.MovePosition(target);
-            }
+            movementStrategy.Move(rb, inputProvider.targetPosition);
         }
     }
 
