@@ -94,13 +94,11 @@ public class DataManager : MonoBehaviour
         string leaderboardJson = JsonUtility.ToJson(leaderboardWrapper, true);
         PlayerPrefs.SetString(LeaderboardKey, leaderboardJson);
 
-        PlayerPrefs.Save();
-        Debug.Log("Data saved successfully!");
-
         string settingsJson = JsonUtility.ToJson(gameSettings, true);
         PlayerPrefs.SetString(GameSettingsKey, settingsJson);
 
-
+        PlayerPrefs.Save();
+        Debug.Log("Data saved successfully!");
 
     }
 
@@ -179,12 +177,12 @@ public class DataManager : MonoBehaviour
 
     public BalloonData GetCurrentBalloon()
     {
-        if (PlayerData == null) return allBalloons.FirstOrDefault();
+        if (PlayerData == null) return GetDefaultBallon();
 
         var found = allBalloons.Find(b => b.id == PlayerData.currentBalloonID);
         if (found != null) return found;
 
-        var fallback = GetCurrentBalloon();
+        var fallback = GetDefaultBallon();
         if (fallback != null)
         {
             SetCurrentBalloon(fallback.id);
@@ -283,7 +281,7 @@ public class DataManager : MonoBehaviour
         if (found != null)
             return found;
 
-        var fallback = allBalloons.FirstOrDefault(b => b.isUnlockedByDefault) ?? allBalloons.FirstOrDefault();
+        var fallback = GetDefaultBallon();
         SetCurrentBalloon(fallback.id);
 
         return fallback;
